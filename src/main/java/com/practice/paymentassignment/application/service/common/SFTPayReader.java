@@ -18,8 +18,8 @@ public class SFTPayReader {
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public Account findByIdForUpdate(Long userId) {
-        return accountRepository.findByIdForUpdate(userId)
+    public Account findByIdForUpdate(Long accountId) {
+        return accountRepository.findByIdForUpdate(accountId)
                 .orElseThrow(() -> new RuntimeException("계좌 정보 없음"));
     }
 
