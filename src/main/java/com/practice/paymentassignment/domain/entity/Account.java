@@ -18,11 +18,6 @@ public class Account extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
-    private String accountNumber;
-
-    @Column
-    private Long balance;
     // 중간 테이블로 다대다 관계 해소
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -32,8 +27,35 @@ public class Account extends BaseEntity {
     @JoinColumn(name = "bank_id")
     private Bank bank;
 
+    @Column
+    private String accountNumber;
+
+    @Column
+    private Long balance;
+
     public Account(long balance) {
         this.balance = balance;
+    }
+
+    public Account(User user, Bank bank, String accountNumber, long balance) {
+        this.user = user;
+        this.bank = bank;
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
+    public static Account create(
+            User user,
+            Bank bank,
+            String accountNumber,
+            Long balance
+    ) {
+        return new Account(
+                user,
+                bank,
+                accountNumber,
+                balance
+        );
     }
 
     public void checkAccount() {

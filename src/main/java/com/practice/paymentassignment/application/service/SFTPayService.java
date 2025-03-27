@@ -18,16 +18,32 @@ public class SFTPayService {
     private final SFTPayReader sftPayReader;
     private final PGService pgService;
 
+
+    // before
+//    @Transactional
+//    public PaymentResponseDto requestPayment(PaymentRequestDto request) {
+//        User user = sftPayReader.findByUserId(request.userId());
+//
+//        SFTPay sftPay = SFTPay.create(user, request.amount(), request.storeName(),false);
+//
+//        SFTPay saved = sftPayRepository.save(sftPay);
+//
+//        return PaymentResponseDto.of(saved);
+//    }
+
+    // after
     @Transactional
-    public PaymentResponseDto requestPayment(PaymentRequestDto request) {
+    public SFTPay requestPayment(PaymentRequestDto request) {
         User user = sftPayReader.findByUserId(request.userId());
 
         SFTPay sftPay = SFTPay.create(user, request.amount(), request.storeName(),false);
 
         SFTPay saved = sftPayRepository.save(sftPay);
 
-        return PaymentResponseDto.of(saved);
+        return saved;
     }
+
+
 
     @Transactional
     public Boolean approvePayment(ApprovePaymentRequestDto request) {

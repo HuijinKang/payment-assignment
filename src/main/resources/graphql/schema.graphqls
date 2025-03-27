@@ -1,0 +1,51 @@
+type Query {
+    user(id: ID!): User
+}
+
+type User {
+    id: ID!
+    name: String
+    accounts: [Account] # User클래스의 필드명과 graphql의 필드명이 일치해야함, getAccounts() -> accounts
+}
+
+type STFPay {
+    id: ID!
+    user: User
+    amount: Int
+    storeName: String
+    status: Boolean
+}
+
+type Bank {
+    id: ID!
+    accounts: [Account!]!
+    user: User
+}
+
+type Account {
+    id: ID!
+    accountNumber: String
+    balance: Int
+    user: User
+    bank: Bank
+}
+
+
+
+type Mutation {
+    createSFTPay(input: CreateSFTPayInput!): STFPay
+    createAccount(input: CreateAccountInput!): Account
+}
+
+input CreateSFTPayInput {
+    userId: ID!
+    amount: Int
+    storeName: String
+}
+
+input CreateAccountInput {
+    userId: ID!
+    bankId: ID!
+    accountNumber: String!
+    balance: Int!
+}
