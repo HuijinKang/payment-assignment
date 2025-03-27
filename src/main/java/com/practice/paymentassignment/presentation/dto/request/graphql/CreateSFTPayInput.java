@@ -11,4 +11,3 @@ public record CreateSFTPayInput(
         return new PaymentRequestDto(userId, amount, storeName);
     }
 }
-

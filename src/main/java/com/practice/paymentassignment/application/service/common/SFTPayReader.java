@@ -3,9 +3,11 @@ package com.practice.paymentassignment.application.service.common;
 import com.practice.paymentassignment.common.CustomException;
 import com.practice.paymentassignment.common.ErrorCode;
 import com.practice.paymentassignment.domain.entity.Account;
+import com.practice.paymentassignment.domain.entity.Bank;
 import com.practice.paymentassignment.domain.entity.SFTPay;
 import com.practice.paymentassignment.domain.entity.User;
 import com.practice.paymentassignment.infrastructure.repository.AccountRepository;
+import com.practice.paymentassignment.infrastructure.repository.BankRepository;
 import com.practice.paymentassignment.infrastructure.repository.SFTPayRepository;
 import com.practice.paymentassignment.infrastructure.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ public class SFTPayReader {
     private final AccountRepository accountRepository;
     private final SFTPayRepository sftPayRepository;
     private final UserRepository userRepository;
+    private final BankRepository bankRepository;
 
     @Transactional(readOnly = true)
     public Account findByIdForUpdate(Long accountId) {
@@ -35,6 +38,12 @@ public class SFTPayReader {
     public User findByUserId(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+    }
+
+    @Transactional(readOnly = true)
+    public Bank findByBankId(Long id) {
+        return bankRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.BANK_NOT_FOUND));
     }
 
     /**
