@@ -1,5 +1,7 @@
 package com.practice.paymentassignment.domain.entity;
 
+import com.practice.paymentassignment.common.CustomException;
+import com.practice.paymentassignment.common.ErrorCode;
 import com.practice.paymentassignment.domain.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,7 +30,7 @@ public class User extends BaseEntity {
 
     public void matchesId(Long id) {
         if (id == null || this.id != id ) {
-            throw new RuntimeException("유저 정보 불일치");
+            throw new CustomException(ErrorCode.USER_INFO_MISMATCH);
         }
     }
 }

@@ -26,8 +26,8 @@ public class SFTPayController {
 
     @PostMapping("/approvePayment")
     public ResponseEntity<Boolean> approvePayment(@RequestBody ApprovePaymentRequestDto request) {
-        Boolean success = sftPayService.approvePayment(request);
+        Boolean result = sftPayService.approvePayment(request);
 
-        return ResponseEntity.status(200).body(success);
+        return ResponseEntity.status(200).body(result);
     }
 }

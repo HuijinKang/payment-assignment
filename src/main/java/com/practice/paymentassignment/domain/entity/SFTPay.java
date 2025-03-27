@@ -1,5 +1,7 @@
 package com.practice.paymentassignment.domain.entity;
 
+import com.practice.paymentassignment.common.CustomException;
+import com.practice.paymentassignment.common.ErrorCode;
 import com.practice.paymentassignment.domain.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -49,13 +51,13 @@ public class SFTPay extends BaseEntity {
     //JPA의 변경 감지(dirty checking)
     public void checkStatus() {
         if (this.status) {
-            throw new RuntimeException("결제가 완료된 건입니다.");
+            throw new CustomException(ErrorCode.PAYMENT_ALREADY_COMPLETED);
         }
     }
 
     public void changeStatus(boolean status) {
         if (this.status) {
-            throw new RuntimeException("결제가 완료된 건입니다.");
+            throw new CustomException(ErrorCode.PAYMENT_ALREADY_COMPLETED);
         }
 
         this.status = status;

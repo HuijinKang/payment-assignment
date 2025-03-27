@@ -1,7 +1,6 @@
 package com.practice.paymentassignment.application.service;
 
 import com.practice.paymentassignment.application.service.common.SFTPayReader;
-import com.practice.paymentassignment.domain.entity.Account;
 import com.practice.paymentassignment.domain.entity.SFTPay;
 import com.practice.paymentassignment.domain.entity.User;
 import lombok.RequiredArgsConstructor;

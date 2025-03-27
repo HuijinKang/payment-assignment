@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 
 @SpringBootTest
 @Rollback(false)
-public class SFTPayRepositoryTest {
+class SFTPayRepositoryTest {
     @Autowired
     private AccountRepository accountRepository;
 

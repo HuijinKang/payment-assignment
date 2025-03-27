@@ -1,5 +1,7 @@
 package com.practice.paymentassignment.domain.entity;
 
+import com.practice.paymentassignment.common.CustomException;
+import com.practice.paymentassignment.common.ErrorCode;
 import com.practice.paymentassignment.domain.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -36,13 +38,13 @@ public class Account extends BaseEntity {
 
     public void checkAccount() {
         if (this.balance < 0) {
-            throw new RuntimeException("잔액 부족");
+            throw new CustomException(ErrorCode.INSUFFICIENT_BALANCE);
         }
     }
 
     public void deductBalance(Long amount) {
         if (this.balance < amount) {
-            throw new RuntimeException("잔액 부족");
+            throw new CustomException(ErrorCode.INSUFFICIENT_BALANCE);
         }
         this.balance -= amount;
     }

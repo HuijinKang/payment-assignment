@@ -12,6 +12,11 @@ import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
+    /**
+     * 1. DB 수준에서 락이 걸림
+     * 2. 해당 row 읽기, 쓰기 불가
+     * 3. 락의 지속 범위는 트랜잭션이 끝날 때까지.
+     * */
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select a from Account a where a.id = :id")
     Optional<Account> findByIdForUpdate(@Param("id") Long id);
