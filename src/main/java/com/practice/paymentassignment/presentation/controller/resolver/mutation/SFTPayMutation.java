@@ -14,8 +14,9 @@ import org.springframework.stereotype.Controller;
 public class SFTPayMutation {
     private final SFTPayService sftPayService;
 
+    // 결제 정보 생성
     @MutationMapping
-    public SFTPay createSFTPay(@Argument("input") CreateSFTPayInput input) {
+    public PaymentResponseDto createSFTPay(@Argument("input") CreateSFTPayInput input) {
         return sftPayService.requestPayment(input.toPaymentRequest());
     }
 }

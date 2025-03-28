@@ -18,21 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class SFTPayController {
     private final SFTPayService sftPayService;
 
-
-    // before
-//    @PostMapping("/requestPayment")
-//    public ResponseEntity<PaymentResponseDto> requestPayment(@RequestBody PaymentRequestDto request) {
-//        PaymentResponseDto response = sftPayService.requestPayment(request);
-//
-//        return ResponseEntity.status(200).body(response);
-//    }
-
-    // after
     @PostMapping("/requestPayment")
     public ResponseEntity<PaymentResponseDto> requestPayment(@RequestBody PaymentRequestDto request) {
-        SFTPay response = sftPayService.requestPayment(request);
+        PaymentResponseDto response = sftPayService.requestPayment(request);
 
-        return ResponseEntity.status(200).body(PaymentResponseDto.of(response));
+        return ResponseEntity.status(200).body(response);
     }
 
     @PostMapping("/approvePayment")
