@@ -1,7 +1,8 @@
 package com.practice.paymentassignment.presentation.controller.resolver.query;
 
+import com.practice.paymentassignment.application.service.common.SFTPayReader;
 import com.practice.paymentassignment.domain.entity.User;
-import com.practice.paymentassignment.infrastructure.repository.UserRepository;
+import com.practice.paymentassignment.presentation.dto.response.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -11,12 +12,12 @@ import org.springframework.stereotype.Controller;
 @RequiredArgsConstructor
 public class UserQuery {
 
-    private final UserRepository userRepository;
+    private final SFTPayReader reader;
 
     @QueryMapping
-    public User user(@Argument Long id) {
-        User user = userRepository.findById(id).orElse(null);
-        return user;
-    }
+    public UserResponseDto user(@Argument Long id) {
+        User user = reader.findByUserId(id);
 
+        return UserResponseDto.from(user);
+    }
 }

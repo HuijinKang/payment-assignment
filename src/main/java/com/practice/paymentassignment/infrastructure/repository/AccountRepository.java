@@ -1,6 +1,7 @@
 package com.practice.paymentassignment.infrastructure.repository;
 
 import com.practice.paymentassignment.domain.entity.Account;
+import com.practice.paymentassignment.presentation.dto.request.CreateSFTPayRequestDto;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
@@ -18,8 +19,8 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
      * 3. 락의 지속 범위는 트랜잭션이 끝날 때까지.
      * */
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("select a from Account a where a.id = :id")
-    Optional<Account> findByIdForUpdate(@Param("id") Long id);
+    @Query("select a from Account a where a.accountNumber = :accountNumber")
+    Optional<Account> findByAccountNumberForUpdate(@Param("accountNumber") String accountNumber);
 
     @Modifying
     @Query("UPDATE Account a SET a.balance = a.balance - :amount WHERE a.id = :id and a.balance >= :amount")

@@ -14,12 +14,16 @@ public class PGService {
     private final SFTPayReader sftPayReader;
 
     @Transactional
-    public boolean payment(SFTPay request) {
-        User user = sftPayReader
-                .findByUserId(request.getUser().getId());
-        user.matchesId(request.getUser().getId());
+    public boolean payment(SFTPay request, String accountNumber) {
+        Long amount = request.getAmount();
+        Long userId = request.getUser().getId();
 
-        bankService.requestPayment(request);
+        User user = sftPayReader
+                .findByUserId(userId);
+
+        user.matchesId(userId);
+
+        bankService.requestPayment(accountNumber, amount);
 
         return true;
     }

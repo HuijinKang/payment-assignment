@@ -30,17 +30,21 @@ type Account {
     bank: Bank
 }
 
-
-
 type Mutation {
-    createSFTPay(input: CreateSFTPayInput!): STFPay
+    createSFTPay(request: CreateSFTPayRequestDto!): STFPay
+    payment(request: PaymentRequestDto!): Boolean
     createAccount(input: CreateAccountInput!): Account
 }
 
-input CreateSFTPayInput {
+input CreateSFTPayRequestDto {
     userId: ID!
     amount: Int
     storeName: String
+}
+
+input PaymentRequestDto {
+    sftPayId: ID!
+    accountNumber: ID!
 }
 
 input CreateAccountInput {

@@ -23,9 +23,9 @@ public class SFTPayReader {
     private final BankRepository bankRepository;
 
     @Transactional(readOnly = true)
-    public Account findByIdForUpdate(Long accountId) {
-        return accountRepository.findByIdForUpdate(accountId)
-                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+    public Account findByAccountNumberForUpdate(String accountNumber) {
+        return accountRepository.findByAccountNumberForUpdate(accountNumber)
+                .orElseThrow(() -> new CustomException(ErrorCode.ACCOUNT_NOT_FOUND));
     }
 
     @Transactional(readOnly = true)

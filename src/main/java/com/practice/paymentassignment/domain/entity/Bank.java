@@ -18,8 +18,8 @@ public class Bank extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+    @Column
+    private String name;
 
     @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
     private List<Account> accounts;

@@ -18,7 +18,6 @@ public class Account extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    // 중간 테이블로 다대다 관계 해소
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
